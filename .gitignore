@@ -2,4 +2,5 @@
 **/dockerName
 infra/**
 skaffold.yaml
+client/.next
 **/.dockerignore
