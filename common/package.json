@@ -1,5 +1,5 @@
 {
-  "name": "@rallycoding/common",
+  "name": "@fntickets30/common",
   "version": "1.0.2",
   "description": "",
   "main": "./build/index.js",
