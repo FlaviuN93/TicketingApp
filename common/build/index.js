@@ -28,3 +28,4 @@ __exportStar(require("./events/base-listener"), exports);
 __exportStar(require("./events/base-publisher"), exports);
 __exportStar(require("./events/events"), exports);
 __exportStar(require("./events/subjects"), exports);
+__exportStar(require("./events/types"), exports);
