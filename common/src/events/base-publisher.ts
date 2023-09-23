@@ -1,4 +1,4 @@
-import { Message, Stan } from 'node-nats-streaming'
+import { Stan } from 'node-nats-streaming'
 import { Subjects } from './subjects'
 
 interface Event {
@@ -8,7 +8,7 @@ interface Event {
 
 export abstract class Publisher<T extends Event> {
   abstract subject: T['subject']
-  private client: Stan
+  protected client: Stan
 
   constructor(client: Stan) {
     this.client = client

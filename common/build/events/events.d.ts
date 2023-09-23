@@ -5,6 +5,7 @@ export interface TicketCreatedEvent {
     data: {
         id: string;
         title: string;
+        version: number;
         price: number;
         userId: string;
     };
@@ -14,6 +15,7 @@ export interface TicketUpdatedEvent {
     data: {
         id: string;
         title: string;
+        version: number;
         price: number;
         userId: string;
     };
@@ -23,6 +25,7 @@ export interface OrderCreatedEvent {
     data: {
         id: string;
         status: OrderStatus;
+        version: number;
         userId: string;
         expiresAt: string;
         ticket: {
@@ -35,6 +38,7 @@ export interface OrderCancelledEvent {
     subject: Subjects.OrderCancelled;
     data: {
         id: string;
+        version: number;
         ticket: {
             id: string;
         };
