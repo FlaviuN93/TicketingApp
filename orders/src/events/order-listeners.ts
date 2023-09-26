@@ -2,6 +2,7 @@ import {
   ExpirationCompleteEvent,
   Listener,
   OrderStatus,
+  PaymentCreatedEvent,
   Subjects,
   TicketCreatedEvent,
   TicketUpdatedEvent,
@@ -45,6 +46,7 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
     const order = await Order.findById(data.orderId).populate('ticket')
 
     if (!order) throw new Error('Order not found')
+    if (order.status === OrderStatus.Complete) return msg.ack()
     order.set({ status: OrderStatus.Cancelled })
 
     await order.save()
@@ -54,6 +56,18 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
       version: order.version,
       ticket: { id: order.ticket.id },
     })
+    msg.ack()
+  }
+}
+
+export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
+  readonly subject = Subjects.PaymentCreated
+  queueGroupName = 'orders-service'
+  async onMessage(data: PaymentCreatedEvent['data'], msg: Message) {
+    const order = await Order.findById(data.orderId)
+    if (!order) throw new Error('Order not found')
+    order.set({ status: OrderStatus.Complete })
+    await order.save()
     msg.ack()
   }
 }
