@@ -88,7 +88,7 @@ it('sets the orderId of the ticket', async () => {
 it('acks the message', async () => {
   const { listener, data, msg } = await orderCreatedSetup()
   await listener.onMessage(data, msg)
-  expect(msg.ack()).toHaveBeenCalled()
+  expect(msg.ack).toHaveBeenCalled()
 })
 
 it('publishes a ticket update event', async () => {
@@ -109,6 +109,6 @@ it('updates the ticket, publishes an event, and acks the message', async () => {
 
   const updatedTicket = await Ticket.findById(ticket.id)
   expect(updatedTicket!.orderId).not.toBeDefined()
-  expect(msg.ack()).toHaveBeenCalled()
+  expect(msg.ack).toHaveBeenCalled()
   expect(natsWrapper.client.publish).toHaveBeenCalled()
 })

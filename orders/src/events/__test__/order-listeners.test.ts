@@ -160,5 +160,5 @@ it('emits an order cancelled event', async () => {
 it('ack the message', async () => {
   const { listener, data, msg } = await expirationCompleteSetup()
   await listener.onMessage(data, msg)
-  expect(msg.ack()).toHaveBeenCalled()
+  expect(msg.ack).toHaveBeenCalled()
 })
