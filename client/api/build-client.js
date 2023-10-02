@@ -1,15 +1,14 @@
-import axios from "axios";
+import axios from 'axios'
 
 const buildClient = ({ req }) => {
-  if (typeof window === "undefined")
+  if (typeof window === 'undefined')
     // we are on the server
     return axios.create({
-      baseURL:
-        "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+      baseURL: 'http://www.ticketing-test-microservices.site/',
       headers: req.headers,
-    });
+    })
   // we are on the client
-  else return axios.create({ baseURL: "/" });
-};
+  else return axios.create({ baseURL: '/' })
+}
 
-export default buildClient;
+export default buildClient
